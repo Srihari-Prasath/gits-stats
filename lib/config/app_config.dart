@@ -11,7 +11,7 @@ class AppConfig {
 
   // Storage keys (for backward compatibility)
   static const String tokenKey = 'github_token';
-  static const String usernameKey = 'github_username';
+  static const String usernameKey = 'github_user';
 
   // App info
   static const String appName = 'GitTrack';
