@@ -52,23 +52,15 @@ class GitHubStats {
     final sortedDays = List<ContributionDay>.from(days)
       ..sort((a, b) => b.date.compareTo(a.date));
 
-    // Calculate current streak (from today backwards)
-    final today = DateTime.now();
+    // Calculate current streak (from most recent day backwards)
     bool streakBroken = false;
 
     for (var day in sortedDays) {
-      if (day.date.isAfter(today)) continue;
-
       if (!streakBroken) {
         if (day.contributionCount > 0) {
           currentStreak++;
         } else {
-          // Allow one day grace (today might not have contributions yet)
-          final daysDiff = today.difference(day.date).inDays;
-          if (daysDiff <= 1) {
-            // Don't break streak for today or yesterday if it's early
-            continue;
-          }
+          // Streak is broken on the first day with no contributions
           streakBroken = true;
         }
       }
